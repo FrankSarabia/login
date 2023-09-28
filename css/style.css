@@ -1,0 +1,9 @@
+body{
+    background-color: #d3d3d3;
+}
+#mainContainer{
+    width: 50ex;
+    height: 30em;
+    background-color: #e6e6e6;
+    margin: 0 auto;
+}

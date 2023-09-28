@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Inicio de Sesión</title>
+</head>
+<body>
+    <div id="mainContainer" class="col-lg-4" align="center">
+        <div>
+            <h1>Inicio de Sesión</h1>
+        </div>
+        <div>
+            <form action="/login/php/verificar_user.php" method="post">
+                <div>
+                    <h4>Usuario: </h4><input type="text" name="userName" id="userName" required>
+                </div>
+                <div>
+                    <h4>Contraseña: </h4><input type="password" name="password" id="password" required>
+                </div>
+                <div>
+                    <input type="submit" value="Entrar">
+                </div>   
+            </form>
+            <div>
+                <h5>¿Aún no estás registrado?<a href="/login/html/registro.html">¡Haz click aquí!</a></h5>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
