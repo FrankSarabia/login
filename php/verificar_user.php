@@ -20,23 +20,25 @@
         $result = mysqli_query($conect, $sql_query) or die("Algo ha ido mal en la consulta a la base de datos");
 
         $row = mysqli_fetch_array($result);
-        //echo 'Usuario que se encontro en la db: ' . $row['user'] . '  Contrasenia que se encontro en la db: ' . $row['password'] . '<br><br>';
-
+        $passwordHash = $row['password'];
+        /*echo 'Usuario que se encontro en la db: ' . $row['user'] . '  Contrasenia que se encontro en la db: ' . $row['password'] . '<br><br>';
+        var_dump($passwordHash);
+        var_dump($password);*/
         if (mysqli_num_rows($result) == 1) {
             //echo 'Si encontro el usuario';
 
-            if ($password == $row['password']) {
+            if (password_verify($password, $passwordHash)) {
                 header('Location: /login/html/hola.html');
                 exit();
             } else {
                 //echo 'Contraseña incorrecta';
                 echo 'Usuario o contraseña incorrecta';
-                echo '<br><br><a href="index.html"><button>Volver</button></a>';
+                echo '<br><br><a href="/../login/index.html"><button>Volver</button></a>';
             }
         } else {
             //echo 'Usuario no encontrado';
             echo 'Usuario o contraseña incorrecta';
-            echo '<br><br><a href="index.html"><button>Volver</button></a>';
+            echo '<br><br><a href="/../login/index.html"><button>Volver</button></a>';
         }
     }
     ?>

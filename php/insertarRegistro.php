@@ -16,6 +16,7 @@
         $username = $_POST['userName'];
         $password = $_POST['password'];
         $passwordConfirm = $_POST['passwordConfirm'];
+        $email = $_POST['email'];
 
         if ($password != $passwordConfirm) {
             echo 'Las contraseñas no coinciden';
@@ -33,8 +34,9 @@
                 $result = mysqli_query($conect, $sql_query) or die("Algo ha ido mal en la consulta a la base de datos");
                 $id = mysqli_num_rows($result);
                 $id_nueva = $id + 1;
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 //echo 'Id nuevo: ' . $id_nueva;
-                $sql_query = "INSERT INTO users VALUES ('$id_nueva','$username','$password')";
+                $sql_query = "INSERT INTO users VALUES ('$id_nueva','$username','$hashedPassword','$email')";
                 $result = mysqli_query($conect, $sql_query) or die("Algo ha ido mal en la consulta a la base de datos");
 
                 /*
