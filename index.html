@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <script src="/../login/js/verifica_user.js"></script>
     <title>Inicio de Sesión</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
             <h1>Inicio de Sesión</h1>
         </div>
         <div>
-            <form action="/login/php/verificar_user.php" method="post">
+            <form id="loginForm">
                 <div>
                     <h4>Usuario: </h4><input type="text" name="userName" id="userName" required>
                 </div>
@@ -23,6 +24,7 @@
                     <input type="submit" value="Entrar">
                 </div>   
             </form>
+            <div id="errorUserPassVerification" hidden>Usuario o contraseña incorrecta</div>
             <div>
                 <h5>¿Aún no estás registrado?<a href="/login/html/registro.html">¡Haz click aquí!</a></h5>
             </div>

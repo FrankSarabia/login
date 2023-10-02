@@ -7,3 +7,6 @@ body{
     background-color: #e6e6e6;
     margin: 0 auto;
 }
+#errorUserPassVerification{
+    color: red;
+}

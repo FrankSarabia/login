@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conexion</title>
-</head>
-<body>
     <?php
     $db_host="localhost";
     $db_name="test";
@@ -15,7 +7,7 @@
     $conect=mysqli_connect($db_host, $db_user, "", $db_name);
 
     if(!$conect){
-        die('Error al conectar co la base de datos: '.mysqli_connect_error());
+        die('Error al conectar conectar la base de datos: '.mysqli_connect_error());
     }
     /*else{
         echo'Conexion exitosa';
@@ -31,5 +23,3 @@
     }
     }*/
     ?>
-</body>
-</html>
