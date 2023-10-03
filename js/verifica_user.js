@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Obtén los datos del formulario
     const formData = new FormData(this);
-    console.log("Hola");
+    //console.log("Hola");
 
     // Realiza la solicitud AJAX
     fetch("../login/php/verificar_user.php", {

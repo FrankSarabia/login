@@ -1,57 +1,53 @@
-<!DOCTYPE html>
-<html lang="es">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-</head>
+include 'conexion.php';
 
-<body>
-    <?php
+$username = $_POST['userName'];
+$password = $_POST['password'];
+$passwordConfirm = $_POST['passwordConfirm'];
+$email = $_POST['email'];
 
-    include 'conexion.php';
+$response = array();
 
-    if (isset($_POST['userName']) && isset($_POST['password'])) {
-        $username = $_POST['userName'];
-        $password = $_POST['password'];
-        $passwordConfirm = $_POST['passwordConfirm'];
-        $email = $_POST['email'];
+if (isset($username) && isset($password) && isset($passwordConfirm) && isset($email)) {
 
-        if ($password != $passwordConfirm) {
-            echo 'Las contraseñas no coinciden';
-            echo '<br><br><a href="/login/html/registro.html"><button>Volver</button></a>';
-        } else {
-            $sql_query = "SELECT * FROM users WHERE user = '$username'";
-            $result = mysqli_query($conect, $sql_query) or die("Algo ha ido mal en la consulta a la base de datos");
-
-            if (mysqli_num_rows($result) != 0) {
-                echo 'Nombre de usuario ya existente';
-                echo '<br><br><a href="/login/html/registro.html"><button>Volver</button></a>';
-
-            } else {
-                $sql_query = "SELECT id FROM users";
-                $result = mysqli_query($conect, $sql_query) or die("Algo ha ido mal en la consulta a la base de datos");
-                $id = mysqli_num_rows($result);
-                $id_nueva = $id + 1;
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                //echo 'Id nuevo: ' . $id_nueva;
-                $sql_query = "INSERT INTO users VALUES ('$id_nueva','$username','$hashedPassword','$email')";
-                $result = mysqli_query($conect, $sql_query) or die("Algo ha ido mal en la consulta a la base de datos");
-
-                /*
-                $sql_query = "SELECT * FROM users WHERE user = '$username'";
-                $result = mysqli_query($conect, $sql_query) or die("Algo ha ido mal en la consulta a la base de datos");
-                $row = mysqli_fetch_array($result);
-                echo 'Usuario insertado:  '. $row['user'].'  Contraseña insertada:  '. $row['password']. '  Id insertado:  '. $row['id'];
-                */
-
-                echo 'Registro exitoso!';
-                echo '<br><br><a href="/../login/index.html"><button>Volver</button></a>';
-            }
-        }
+    $sql_query = "SELECT * FROM users WHERE email = '$email'";
+    $result = mysqli_query($conect, $sql_query) or die("Algo ha ido mal en la consulta a la base de datos");
+    if (mysqli_num_rows($result) != 0) {
+        $response['emailExistente'] = true;
+        $response['mensageEmail'] = 'Email ya registrado';
+    } else {
+        $response['emailExistente'] = false;
+        $response['mensageEmail'] = 'Email no registrado';
     }
-    ?>
-</body>
 
-</html>
+    if ($password != $passwordConfirm) {
+        $response['passwordIgual'] = false;
+        $response['mensagePass'] = 'Las contraseñas no coinciden';
+    } else {
+        $response['passwordIgual'] = true;
+        $response['mensagePass'] = 'Las contraseñas coinciden';
+    }
+
+    $sql_query = "SELECT * FROM users WHERE user = '$username'";
+    $result = mysqli_query($conect, $sql_query) or die("Algo ha ido mal en la consulta a la base de datos");
+    if (mysqli_num_rows($result) != 0) {
+        $response['usuarioExistente'] = true;
+        $response['mensageUser'] = 'Nombre de usuario ya existente';
+    } else {
+        $response['usuarioExistente'] = false;
+        $response['mensageUser'] = 'Nombre de usuario nuevo';
+    }
+
+    echo json_encode($response);
+    if (!($response['usuarioExistente']) && !($response['emailExistente']) && $response['passwordIgual']) {
+        $sql_query = "SELECT id FROM users";
+        $result = mysqli_query($conect, $sql_query) or die("Algo ha ido mal en la consulta a la base de datos");
+        $id = mysqli_num_rows($result);
+        $id_nueva = $id + 1;
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $sql_query = "INSERT INTO users VALUES ('$id_nueva','$username','$hashedPassword','$email')";
+        $result = mysqli_query($conect, $sql_query) or die("Algo ha ido mal en la consulta a la base de datos");
+    }
+}
+?>

@@ -4,32 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/login/css/style.css">
+    <script src="/../login/js/insertar_registro.js"></script>
     <title>Registro</title>
 </head>
 <body>
     <div id="mainContainer" class="col-lg-4" align="center">
         <h1>REGISTRO</h1>
-        <form action="/login/php/insertarRegistro.php" method="post">
+        <form id="registroForm">
             <div>
                 <h4>Usuario: </h4><input type="text" name="userName" id="userName" required>
+                <div id="textoUsuario" hidden>Usuario ya existente</div>
             </div>
             <div>
                 <h4>Correo: </h4><input type="email" name="email" id="email" required>
+                <div id="textoEmail" hidden>Email ya registrado</div>
             </div>
             <div>
                 <h4>Contraseña: </h4><input type="password" name="password" id="password" required>
             </div>
             <div>
                 <h4>Confirmar contraseña: </h4><input type="password" name="passwordConfirm" id="passwordConfirm" required>
+                <div id="textoPasswords" hidden>Contraseñas no coinciden</div>
             </div>
             <div>
-                <input type="submit" value="Entrar" id="registro">
+                <input type="submit" value="Entrar">
             </div> 
         </form>
-        <a href="/../login/index.html"><button>Volver</button></a>
-        <script>
-            // usar AJAX para realizar el login
-        </script>
+        <br><a href="/../login/index.html"><button>Volver</button></a>
     </div>
 </body>
 </html>

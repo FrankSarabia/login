@@ -10,3 +10,12 @@ body{
 #errorUserPassVerification{
     color: red;
 }
+#textoPasswords{
+    color: red;
+}
+#textoUsuario{
+    color: red;
+}
+#textoEmail{
+    color: red;
+}
